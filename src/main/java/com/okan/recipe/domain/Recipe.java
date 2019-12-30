@@ -1,6 +1,7 @@
 package com.okan.recipe.domain;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Author:   Okan Hollander
@@ -29,6 +30,9 @@ public class Recipe {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
+
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
+    private Set<Ingredient> ingredients;
 
 
     // == Getters and Setters ==
@@ -110,5 +114,13 @@ public class Recipe {
 
     public void setNotes(Notes notes) {
         this.notes = notes;
+    }
+
+    public Set<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(Set<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 }
