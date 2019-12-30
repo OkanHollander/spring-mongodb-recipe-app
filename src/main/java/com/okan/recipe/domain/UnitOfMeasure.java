@@ -1,15 +1,17 @@
 package com.okan.recipe.domain;
 
-import javax.persistence.*;
-import java.math.BigDecimal;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * Author:   Okan Hollander
  * Date:     30/12/2019
- * Time:     13:27
+ * Time:     13:41
  */
 @Entity
-public class Ingredient {
+public class UnitOfMeasure {
 
     // == Fields ==
     @Id
@@ -17,13 +19,6 @@ public class Ingredient {
     private Long id;
 
     private String description;
-    private BigDecimal amount;
-
-    @ManyToOne
-    private Recipe recipe;
-
-    @OneToOne(fetch = FetchType.EAGER)
-    private UnitOfMeasure uom;
 
 
     // == Getters and Setters ==
@@ -42,22 +37,4 @@ public class Ingredient {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    }
-
-    public Recipe getRecipe() {
-        return recipe;
-    }
-
-    public void setRecipe(Recipe recipe) {
-        this.recipe = recipe;
-    }
-
-
 }
