@@ -3,6 +3,8 @@ package com.okan.recipe.repositories;
 import com.okan.recipe.domain.UnitOfMeasure;
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.Optional;
+
 /**
  * Author:   Okan Hollander
  * Date:     30/12/2019
@@ -10,5 +12,5 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface UnitOfMeasureRepository extends CrudRepository<UnitOfMeasure, Long> {
 
-
+    Optional<UnitOfMeasure> findByDescription(String description);
 }
