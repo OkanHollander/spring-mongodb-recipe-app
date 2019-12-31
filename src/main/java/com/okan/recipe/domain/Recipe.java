@@ -1,6 +1,7 @@
 package com.okan.recipe.domain;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -13,6 +14,7 @@ import java.util.Set;
  */
 @Entity
 @Data
+@EqualsAndHashCode(exclude = {"ingredients", "notes", "categories"})
 public class Recipe {
 
     // == Fields ==
