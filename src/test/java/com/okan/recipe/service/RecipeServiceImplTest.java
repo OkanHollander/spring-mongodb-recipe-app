@@ -1,5 +1,7 @@
 package com.okan.recipe.service;
 
+import com.okan.recipe.converters.RecipeCommandToRecipe;
+import com.okan.recipe.converters.RecipeToRecipeCommand;
 import com.okan.recipe.domain.Recipe;
 import com.okan.recipe.repositories.RecipeRepository;
 import org.junit.Before;
@@ -27,11 +29,17 @@ public class RecipeServiceImplTest {
     @Mock
     RecipeRepository recipeRepository;
 
+    @Mock
+    RecipeToRecipeCommand recipeToRecipeCommand;
+
+    @Mock
+    RecipeCommandToRecipe recipeCommandToRecipe;
+
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        recipeService = new RecipeServiceImpl(recipeRepository);
+        recipeService = new RecipeServiceImpl(recipeRepository, recipeCommandToRecipe, recipeToRecipeCommand);
     }
 
     @Test

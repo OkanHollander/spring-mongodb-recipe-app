@@ -1,5 +1,6 @@
 package com.okan.recipe.service;
 
+import com.okan.recipe.commands.RecipeCommand;
 import com.okan.recipe.domain.Recipe;
 
 import java.util.Set;
@@ -14,4 +15,6 @@ public interface RecipeService {
     Set<Recipe> getRecipes();
 
     Recipe findById(Long id);
+
+    RecipeCommand saveRecipeCommand(RecipeCommand command);
 }

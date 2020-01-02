@@ -52,8 +52,10 @@ public class Recipe {
 
     // == Getters and Setters ==
     public void setNotes(Notes notes) {
-        this.notes = notes;
-        notes.setRecipe(this);
+        if (notes != null) {
+            notes.setRecipe(this);	            this.notes = notes;
+            notes.setRecipe(this);
+        }
     }
 
 
