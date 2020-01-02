@@ -155,6 +155,9 @@ public class RecipeDataLoader implements ApplicationListener<ContextRefreshedEve
         guacRecipe.getCategories().add(americanCategory);
         guacRecipe.getCategories().add(mexicanCategory);
 
+        guacRecipe.setUrl("http://www.simplyrecipes.com/recipes/perfect_guacamole");
+        guacRecipe.setSource("Simply Recipes");
+
         //add to return list
         recipes.add(guacRecipe);
 
@@ -213,6 +216,9 @@ public class RecipeDataLoader implements ApplicationListener<ContextRefreshedEve
 
         tacosRecipe.getCategories().add(americanCategory);
         tacosRecipe.getCategories().add(mexicanCategory);
+
+        tacosRecipe.setUrl("http://www.simplyrecipes.com/recipes/spicy_grilled_chicken_tacos");
+        tacosRecipe.setSource("Simply Recipes");
 
         recipes.add(tacosRecipe);
 
