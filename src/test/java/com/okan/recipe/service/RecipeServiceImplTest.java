@@ -1,5 +1,6 @@
 package com.okan.recipe.service;
 
+import com.okan.recipe.commands.RecipeCommand;
 import com.okan.recipe.converters.RecipeCommandToRecipe;
 import com.okan.recipe.converters.RecipeToRecipeCommand;
 import com.okan.recipe.domain.Recipe;
@@ -73,5 +74,25 @@ public class RecipeServiceImplTest {
         assertEquals(recipes.size(), 1);
 
         verify(recipeRepository, times(1)).findAll();
+    }
+
+    @Test
+    public void getRecipeCoomandByIdTest() throws Exception {
+        Recipe recipe = new Recipe();
+        recipe.setId(1L);
+        Optional<Recipe> recipeOptional = Optional.of(recipe);
+
+        when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
+
+        RecipeCommand recipeCommand = new RecipeCommand();
+        recipeCommand.setId(1L);
+
+        when(recipeToRecipeCommand.convert(any())).thenReturn(recipeCommand);
+
+        RecipeCommand commandById = recipeService.findCommandById(1L);
+
+        assertNotNull("Null recipe returned", commandById);
+        verify(recipeRepository, times(1)).findById(anyLong());
+        verify(recipeRepository, never()).findAll();
     }
 }
