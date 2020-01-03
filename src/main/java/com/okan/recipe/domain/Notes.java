@@ -1,7 +1,8 @@
 package com.okan.recipe.domain;
 
-import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -10,7 +11,8 @@ import javax.persistence.*;
  * Date:     30/12/2019
  * Time:     13:06
  */
-@Data
+@Getter
+@Setter
 @EqualsAndHashCode(exclude = {"recipe"})
 @Entity
 public class Notes {

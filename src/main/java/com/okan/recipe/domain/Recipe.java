@@ -1,7 +1,8 @@
 package com.okan.recipe.domain;
 
-import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -13,7 +14,8 @@ import java.util.Set;
  * Time:     13:06
  */
 @Entity
-@Data
+@Getter
+@Setter
 @EqualsAndHashCode(exclude = {"ingredients", "notes", "categories"})
 public class Recipe {
 
