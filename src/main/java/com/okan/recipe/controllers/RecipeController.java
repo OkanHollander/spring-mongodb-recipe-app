@@ -2,18 +2,17 @@ package com.okan.recipe.controllers;
 
 import com.okan.recipe.commands.RecipeCommand;
 import com.okan.recipe.service.RecipeService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Author:   Okan Hollander
  * Date:     02/01/2020
  * Time:     07:59
  */
+@Slf4j
 @Controller
 @RequestMapping("/recipe")
 public class RecipeController {
@@ -49,5 +48,14 @@ public class RecipeController {
         RecipeCommand savedCommand = recipeService.saveRecipeCommand(command);
 
         return "redirect:/recipe/" + savedCommand.getId() + "/show";
+    }
+
+    @GetMapping("/{id}/delete")
+    public String deleteRecipe(@PathVariable Long id) {
+        log.debug("Deleting id - " + id);
+
+        recipeService.deleteById(id);
+
+        return "redirect:/";
     }
 }
