@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
 /**
@@ -19,6 +21,9 @@ public class IngredientCommand {
     private Long id;
     private Long RecipeId;
     private BigDecimal amount;
+
+    @NotBlank
+    @Size(min = 3, max = 255)
     private String description;
     private UnitOfMeasureCommand uom;
 }

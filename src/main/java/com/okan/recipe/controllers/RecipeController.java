@@ -53,7 +53,9 @@ public class RecipeController {
     public String saveOrUpdate(@Valid @ModelAttribute("recipe") RecipeCommand command, BindingResult result) {
 
         if (result.hasErrors()) {
-            result.getAllErrors().forEach(error -> log.debug(error.toString()));
+            result.getAllErrors().forEach(objectError -> {
+                log.debug(objectError.toString());
+            });
 
             return "recipe/recipeform";
         }
