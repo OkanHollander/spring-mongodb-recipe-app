@@ -2,6 +2,7 @@ package com.okan.recipe.controllers;
 
 import com.okan.recipe.commands.RecipeCommand;
 import com.okan.recipe.domain.Recipe;
+import com.okan.recipe.exceptions.NotFoundException;
 import com.okan.recipe.service.RecipeService;
 import org.junit.Before;
 import org.junit.Test;
@@ -100,5 +101,17 @@ public class RecipeControllerTest {
                 .andExpect(view().name("redirect:/"));
 
         verify(recipeService, times(1)).deleteById(anyLong());
+    }
+
+    @Test
+    public void testGetRecipeNotFound()throws Exception {
+
+        Recipe recipe = new Recipe();
+        recipe.setId(1L);
+
+        when(recipeService.findById(anyLong())).thenThrow(NotFoundException.class);
+
+        mockMvc.perform(get("/recipe/1/show"))
+                .andExpect(status().isNotFound());
     }
 }

@@ -4,6 +4,7 @@ import com.okan.recipe.commands.RecipeCommand;
 import com.okan.recipe.converters.RecipeCommandToRecipe;
 import com.okan.recipe.converters.RecipeToRecipeCommand;
 import com.okan.recipe.domain.Recipe;
+import com.okan.recipe.exceptions.NotFoundException;
 import com.okan.recipe.repositories.RecipeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +53,7 @@ public class RecipeServiceImpl implements RecipeService {
         Optional<Recipe> recipeOptional = recipeRepository.findById(id);
 
         if (recipeOptional.isEmpty()) {
-            throw new RuntimeException("Recipe not found!");
+            throw new NotFoundException("Recipe not found!");
         }
 
         return recipeOptional.get();

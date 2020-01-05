@@ -4,6 +4,7 @@ import com.okan.recipe.commands.RecipeCommand;
 import com.okan.recipe.converters.RecipeCommandToRecipe;
 import com.okan.recipe.converters.RecipeToRecipeCommand;
 import com.okan.recipe.domain.Recipe;
+import com.okan.recipe.exceptions.NotFoundException;
 import com.okan.recipe.repositories.RecipeRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -108,8 +109,16 @@ public class RecipeServiceImplTest {
 
         // then
         verify(recipeRepository, times(1)).deleteById(idToDelete);
+    }
 
 
 
+    @Test(expected = NotFoundException.class)
+    public void getRecipeByIdTestNotFound() {
+        Optional<Recipe> recipeOptional = Optional.empty();
+
+        when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
+
+        Recipe returnedRecipe = recipeService.findById(1L);
     }
 }
