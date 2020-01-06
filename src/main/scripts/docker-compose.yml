@@ -1,0 +1,8 @@
+services:
+  image: mysql:latest
+  volumes:
+    - SpringMySQLRecipeApp:/var/lib/mysql
+  environment:
+    - "MYSQL_ROOT_PASSWORD=Welkom@1234"
+  ports:
+    - "3306:3306"
