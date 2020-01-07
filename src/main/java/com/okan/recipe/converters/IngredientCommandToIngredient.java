@@ -2,7 +2,7 @@ package com.okan.recipe.converters;
 
 import com.okan.recipe.commands.IngredientCommand;
 import com.okan.recipe.domain.Ingredient;
-import lombok.Synchronized;
+import com.okan.recipe.domain.Recipe;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
@@ -15,25 +15,31 @@ import org.springframework.stereotype.Component;
 @Component
 public class IngredientCommandToIngredient implements Converter<IngredientCommand, Ingredient> {
 
-    private final UnitOfMeasureCommandToUnitOfMeasure unitOfMeasure;
+    private final UnitOfMeasureCommandToUnitOfMeasure uomConverter;
 
-    public IngredientCommandToIngredient(UnitOfMeasureCommandToUnitOfMeasure unitOfMeasure) {
-        this.unitOfMeasure = unitOfMeasure;
+    public IngredientCommandToIngredient(UnitOfMeasureCommandToUnitOfMeasure uomConverter) {
+        this.uomConverter = uomConverter;
     }
 
-    @Synchronized
     @Nullable
     @Override
-    public Ingredient convert(IngredientCommand ingredientCommand) {
-        if (ingredientCommand != null) {
-            final Ingredient ingredient = new Ingredient();
-            ingredient.setId(ingredientCommand.getId());
-            ingredient.setDescription(ingredientCommand.getDescription());
-            ingredient.setAmount(ingredientCommand.getAmount());
-            ingredient.setUom(unitOfMeasure.convert(ingredientCommand.getUom()));
-
-            return ingredient;
+    public Ingredient convert(IngredientCommand source) {
+        if (source == null) {
+            return null;
         }
-        return null;
+
+        final Ingredient ingredient = new Ingredient();
+        ingredient.setId(source.getId());
+
+        if(source.getRecipeId() != null){
+            Recipe recipe = new Recipe();
+            recipe.setId(source.getRecipeId());
+            recipe.addIngredient(ingredient);
+        }
+
+        ingredient.setAmount(source.getAmount());
+        ingredient.setDescription(source.getDescription());
+        ingredient.setUom(uomConverter.convert(source.getUom()));
+        return ingredient;
     }
 }

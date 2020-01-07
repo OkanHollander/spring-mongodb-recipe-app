@@ -1,10 +1,11 @@
 package com.okan.recipe.domain;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.*;
+import javax.persistence.Id;
 import java.math.BigDecimal;
 
 /**
@@ -14,22 +15,16 @@ import java.math.BigDecimal;
  */
 @Getter
 @Setter
-@EqualsAndHashCode(exclude = {"recipe"})
-@Entity
+@Document
 public class Ingredient {
 
     // == Fields ==
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
-
     private String description;
     private BigDecimal amount;
 
-    @ManyToOne
-    private Recipe recipe;
-
-    @OneToOne(fetch = FetchType.EAGER)
+    @DBRef
     private UnitOfMeasure uom;
 
     // == constructors ==
@@ -47,7 +42,7 @@ public class Ingredient {
         this.description = description;
         this.amount = amount;
         this.uom = uom;
-        this.recipe = recipe;
+//        this.recipe = recipe;
     }
 
 

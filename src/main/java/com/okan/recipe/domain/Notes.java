@@ -1,10 +1,10 @@
 package com.okan.recipe.domain;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.*;
+import javax.persistence.Id;
 
 /**
  * Author:   Okan Hollander
@@ -13,19 +13,13 @@ import javax.persistence.*;
  */
 @Getter
 @Setter
-@EqualsAndHashCode(exclude = {"recipe"})
-@Entity
+@Document
 public class Notes {
 
     // == Fields ==
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
-
-    @OneToOne
     private Recipe recipe;
-
-    @Lob
     private String recipeNotes;
 
 }

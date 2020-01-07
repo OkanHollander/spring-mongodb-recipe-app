@@ -28,58 +28,76 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class IngredientControllerTest {
 
     @Mock
-    RecipeService recipeService;
-
-    @Mock
     IngredientService ingredientService;
 
     @Mock
     UnitOfMeasureService unitOfMeasureService;
 
+    @Mock
+    RecipeService recipeService;
+
+    IngredientController controller;
+
     MockMvc mockMvc;
-    IngredientController ingredientController;
 
     @Before
     public void setUp() throws Exception {
-
         MockitoAnnotations.initMocks(this);
 
-        ingredientController = new IngredientController(recipeService, ingredientService, unitOfMeasureService);
-        mockMvc = MockMvcBuilders.standaloneSetup(ingredientController).build();
+        controller = new IngredientController(ingredientService, recipeService, unitOfMeasureService);
+        mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
     }
-
 
     @Test
     public void testListIngredients() throws Exception {
+        //given
+        RecipeCommand recipeCommand = new RecipeCommand();
+        when(recipeService.findCommandById(anyString())).thenReturn(recipeCommand);
 
-        // given
-        RecipeCommand command = new RecipeCommand();
-        when(recipeService.findCommandById(anyString())).thenReturn(command);
-
-        // when
+        //when
         mockMvc.perform(get("/recipe/1/ingredients"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("recipe/ingredient/list"))
                 .andExpect(model().attributeExists("recipe"));
 
-        // then
+        //then
         verify(recipeService, times(1)).findCommandById(anyString());
     }
 
     @Test
     public void testShowIngredient() throws Exception {
-
         //given
         IngredientCommand ingredientCommand = new IngredientCommand();
 
-        // when
+        //when
         when(ingredientService.findByRecipeIdAndIngredientId(anyString(), anyString())).thenReturn(ingredientCommand);
 
-        // then
+        //then
         mockMvc.perform(get("/recipe/1/ingredient/2/show"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("recipe/ingredient/show"))
                 .andExpect(model().attributeExists("ingredient"));
+    }
+
+    @Test
+    public void testNewIngredientForm() throws Exception {
+        //given
+        RecipeCommand recipeCommand = new RecipeCommand();
+        recipeCommand.setId("1");
+
+        //when
+        when(recipeService.findCommandById(anyString())).thenReturn(recipeCommand);
+        when(unitOfMeasureService.listAllUoms()).thenReturn(new HashSet<>());
+
+        //then
+        mockMvc.perform(get("/recipe/1/ingredient/new"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("recipe/ingredient/ingredientform"))
+                .andExpect(model().attributeExists("ingredient"))
+                .andExpect(model().attributeExists("uomList"));
+
+        verify(recipeService, times(1)).findCommandById(anyString());
+
     }
 
     @Test
@@ -117,27 +135,6 @@ public class IngredientControllerTest {
         )
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/recipe/2/ingredient/3/show"));
-
-    }
-
-    @Test
-    public void testNewIngredientForm() throws Exception {
-        //given
-        RecipeCommand recipeCommand = new RecipeCommand();
-        recipeCommand.setId("1");
-
-        //when
-        when(recipeService.findCommandById(anyString())).thenReturn(recipeCommand);
-        when(unitOfMeasureService.listAllUoms()).thenReturn(new HashSet<>());
-
-        //then
-        mockMvc.perform(get("/recipe/1/ingredient/new"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("recipe/ingredient/ingredientform"))
-                .andExpect(model().attributeExists("ingredient"))
-                .andExpect(model().attributeExists("uomList"));
-
-        verify(recipeService, times(1)).findCommandById(anyString());
 
     }
 

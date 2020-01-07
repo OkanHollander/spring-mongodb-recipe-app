@@ -1,11 +1,11 @@
 package com.okan.recipe.domain;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.*;
-import java.util.HashSet;
+import javax.persistence.Id;
 import java.util.Set;
 
 /**
@@ -15,18 +15,15 @@ import java.util.Set;
  */
 @Getter
 @Setter
-@EqualsAndHashCode(exclude = {"recipes"})
-@Entity
+@Document
 public class Category {
 
     // == Fields ==
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
 
-    @ManyToMany(mappedBy = "categories")
-    private Set<Recipe> recipes = new HashSet<>();
-
+    @DBRef
+    private Set<Recipe> recipes;
     private String description;
 
 
