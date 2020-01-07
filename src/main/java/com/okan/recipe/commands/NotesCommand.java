@@ -17,7 +17,7 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 public class NotesCommand {
 
-    private Long id;
+    private String id;
 
     @NotBlank
     @Size(min = 3, max = 255)

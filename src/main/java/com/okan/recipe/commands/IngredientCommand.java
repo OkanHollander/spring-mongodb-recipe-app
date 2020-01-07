@@ -18,8 +18,8 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class IngredientCommand {
 
-    private Long id;
-    private Long RecipeId;
+    private String id;
+    private String RecipeId;
     private BigDecimal amount;
 
     @NotBlank

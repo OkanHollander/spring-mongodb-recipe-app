@@ -16,7 +16,7 @@ import static org.junit.Assert.assertNotNull;
 public class CategoryToCategoryCommandTest {
 
     public static final String DESCRIPTION = "description";
-    public static final Long LONG_VALUE = 1L;
+    public static final String STRING_VALUE = "1";
 
     CategoryToCategoryCommand converter;
 
@@ -40,7 +40,7 @@ public class CategoryToCategoryCommandTest {
 
         // given
         Category category = new Category();
-        category.setId(LONG_VALUE);
+        category.setId(STRING_VALUE);
         category.setDescription(DESCRIPTION);
 
         // when
@@ -48,7 +48,7 @@ public class CategoryToCategoryCommandTest {
 
         //then
         assertNotNull(command);
-        assertEquals(LONG_VALUE, command.getId());
+        assertEquals(STRING_VALUE, command.getId());
         assertEquals(DESCRIPTION, command.getDescription());
     }
 }

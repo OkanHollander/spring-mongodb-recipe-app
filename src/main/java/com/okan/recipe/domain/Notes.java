@@ -20,7 +20,7 @@ public class Notes {
     // == Fields ==
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     @OneToOne
     private Recipe recipe;

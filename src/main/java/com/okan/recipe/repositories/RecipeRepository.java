@@ -8,7 +8,7 @@ import org.springframework.data.repository.CrudRepository;
  * Date:     30/12/2019
  * Time:     16:18
  */
-public interface RecipeRepository extends CrudRepository<Recipe, Long> {
+public interface RecipeRepository extends CrudRepository<Recipe, String> {
 
 
 

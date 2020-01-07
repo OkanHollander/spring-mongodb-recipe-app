@@ -21,10 +21,10 @@ public class CategoryTest {
 
     @Test
     public void getId() {
-        Long idValue = 4L;
+        String idValue = "4";
 
 
-        category.setId(4L);
+        category.setId("4");
         assertEquals(idValue, category.getId());
     }
 

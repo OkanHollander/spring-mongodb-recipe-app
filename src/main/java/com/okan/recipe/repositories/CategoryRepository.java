@@ -10,7 +10,7 @@ import java.util.Optional;
  * Date:     30/12/2019
  * Time:     16:29
  */
-public interface CategoryRepository extends CrudRepository<Category, Long> {
+public interface CategoryRepository extends CrudRepository<Category, String> {
 
     Optional<Category> findByDescription(String description);
 }

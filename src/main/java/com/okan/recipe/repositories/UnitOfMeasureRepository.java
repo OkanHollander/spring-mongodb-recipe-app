@@ -10,7 +10,7 @@ import java.util.Optional;
  * Date:     30/12/2019
  * Time:     16:29
  */
-public interface UnitOfMeasureRepository extends CrudRepository<UnitOfMeasure, Long> {
+public interface UnitOfMeasureRepository extends CrudRepository<UnitOfMeasure, String> {
 
     Optional<UnitOfMeasure> findByDescription(String description);
 }

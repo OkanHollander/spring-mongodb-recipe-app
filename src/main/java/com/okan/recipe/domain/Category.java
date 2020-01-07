@@ -22,7 +22,7 @@ public class Category {
     // == Fields ==
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     @ManyToMany(mappedBy = "categories")
     private Set<Recipe> recipes = new HashSet<>();

@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 public class NotesCommandToNotesTest {
 
     public static final String DESCRIPTION = "description";
-    public static final Long LONG_VALUE = 1L;
+    public static final String STRING_VALUE = "1";
 
     NotesCommandToNotes converter;
 
@@ -40,7 +40,7 @@ public class NotesCommandToNotesTest {
 
         // given
         NotesCommand command = new NotesCommand();
-        command.setId(LONG_VALUE);
+        command.setId(STRING_VALUE);
         command.setRecipeNotes(DESCRIPTION);
 
         // when
@@ -48,7 +48,7 @@ public class NotesCommandToNotesTest {
 
         // then
         assertNotNull(notes);
-        assertEquals(LONG_VALUE, notes.getId());
+        assertEquals(STRING_VALUE, notes.getId());
         assertEquals(DESCRIPTION, notes.getRecipeNotes());
 
 

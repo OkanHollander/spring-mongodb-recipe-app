@@ -2,6 +2,7 @@ package com.okan.recipe.repositories;
 
 import com.okan.recipe.domain.UnitOfMeasure;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import static org.junit.Assert.assertEquals;
  * Date:     01/01/2020
  * Time:     11:28
  */
+@Ignore
 @RunWith(SpringRunner.class)
 @DataJpaTest
 public class UnitOfMeasureRepositoryIT {

@@ -23,7 +23,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class RecipeCommand {
 
-    private Long id;
+    private String id;
 
     @NotBlank
     @Size(min = 3, max = 255)
