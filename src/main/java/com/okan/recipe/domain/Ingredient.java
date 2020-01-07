@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
 import java.math.BigDecimal;
+import java.util.UUID;
 
 /**
  * Author:   Okan Hollander
@@ -20,7 +21,7 @@ public class Ingredient {
 
     // == Fields ==
     @Id
-    private String id;
+    private String id = UUID.randomUUID().toString();
     private String description;
     private BigDecimal amount;
 
